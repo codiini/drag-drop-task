@@ -1,16 +1,35 @@
 <template>
   <li
-    class="p-4 mb-3 flex justify-between items-center bg-white shadow rounded-lg cursor-move border border-white"
+    class="
+      p-4
+      mb-3
+      flex
+      justify-between
+      items-center
+      bg-white
+      shadow
+      rounded-lg
+      cursor-move
+      border border-white
+    "
   >
     <div class="flex items-center">
-      <!-- <img class="w-10 h-10 rounded-full" :src="user.avatar" :alt="user.name"> -->
-      <p class="ml-2 text-gray-700 font-semibold font-sans tracking-wide">{{user.name}}</p>
+      <p class="ml-2 text-gray-700 font-semibold font-sans tracking-wide">
+        {{ user.name }}
+      </p>
     </div>
     <div class="flex">
       <button
         aria-label="Delete user"
-        class="action-button p-1 focus:outline-none focus:shadow-outline text-red-500 hover:text-red-600"
-        @click="$emit('on-delete', user)"
+        class="
+          action-button
+          p-1
+          focus:outline-none
+          focus:shadow-outline
+          text-red-500
+          hover:text-red-600
+        "
+        @click="deleteCard(user)"
       >
         <Trash2Icon/>
       </button>
@@ -21,13 +40,23 @@
 import { Trash2Icon } from "vue-feather-icons";
 export default {
   components: {
-    Trash2Icon
+    Trash2Icon,
   },
   props: {
     user: {
       type: Object,
-      default: () => ({})
-    }
-  }
+      default: () => ({}),
+    },
+  },
+  methods: {
+   deleteCard(card) {
+      this.$emit('deleteCard', card);
+    },
+  },
+  computed: {
+    getList() {
+      return this.$store.state.cardList;
+    },
+  },
 };
 </script>

@@ -5,32 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userList: [
-      {
-        id: 1,
-        name: "Notion Tab",
-      },
-      {
-        id: 2,
-        name: "Google Docs",
-      },
-      {
-        id: 3,
-        name: "Youtube Tab",
-      },
-      {
-        id: 4,
-        name: "Google search tab",
-      },
-      {
-        id: 5,
-        name: "Spotify",
-      },
+    cardList: [
     ],
   },
   mutations: {
     updateList: (state, payload) => {
-      state.userList = payload;
+      state.cardList = payload;
     }
   },
   actions: {

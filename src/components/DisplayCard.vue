@@ -10,7 +10,6 @@
       bg-white
       shadow
       rounded-lg
-      cursor-move
       border border-white
     "
   >
