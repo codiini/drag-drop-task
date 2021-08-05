@@ -8,16 +8,19 @@
         filter=".action-button"
         class="w-full max-w-md"
         tag="ul"
-        :list="getList"
+        v-model="myList"
       >
-        <user-card
-          v-for="user in users"
+        <control-card
+          v-for="user in this.$store.state.userList"
           :key="user.id"
           :user="user"
-        ></user-card>
+        >
+        </control-card>
       </draggable>
+      <!-- <button @click="openScreen">CLick me</button> -->
     </div>
-    <div
+
+    <ul
       class="
         right-side
         flex flex-col
@@ -28,68 +31,61 @@
         pt-10
       "
     >
-      <draggable
-      :list="getList"
-        :animation="200"
-        ghost-class="moving-card"
-        group="users"
-        filter=".action-button"
-        class="w-full"
-        tag="ul"
+      <display-card
+        v-for="user in this.$store.state.userList"
+        :key="user.id"
+        :user="user"
+        class="h-44 w-full"
+        ref="hello"
       >
-        <user-card
-          v-for="user in users"
-          :key="user.id"
-          :user="user"
-          class="h-44"
-        ></user-card>
-      </draggable>
-    </div>
+      </display-card>
+    </ul>
   </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
-import UserCard from "./components/UserCard";
+import ControlCard from "./components/ControlCard";
+import DisplayCard from "./components/DisplayCard";
+import fscreen from "fscreen";
 export default {
   name: "App",
   components: {
     draggable,
-    UserCard,
+    ControlCard,
+    DisplayCard,
   },
   data() {
-    return {
-      users: [
-        {
-          id: 1,
-          name: "Adrian Schubert",
-        },
-        {
-          id: 2,
-          name: "Violet Gates",
-        },
-        {
-          id: 3,
-          name: "Steve Jobs",
-        },
-        {
-          id: 4,
-          name: "Yassine Smith",
-        },
-        {
-          id: 5,
-          name: "Senior Saez",
-        },
-      ],
-    };
+    return {};
   },
-  computed:{
-    getList(){
-      return this.$store.state.userList
-    }
+  computed: {
+    myList: {
+      get() {
+        return this.$store.state.userList;
+      },
+      set(value) {
+        this.$store.commit("updateList", value);
+      },
+    },
+  },
+  methods: {
+    openScreen() {
+      if (fscreen.fullscreenEnabled) {
+        fscreen.addEventListener("fullscreenchange", handler, false);
+        fscreen.requestFullscreen(this.$refs);
+      }
+
+      function handler() {
+        if (fscreen.fullscreenElement !== null) {
+          console.log("Entered fullscreen mode");
+        } else {
+          console.log("Exited fullscreen mode");
+        }
+      }
+    },
   },
   mounted() {
-    console.log(this.$store);
+    console.log(fscreen.fullscreenEnabled);
   },
 };
 </script>

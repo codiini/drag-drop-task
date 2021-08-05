@@ -8,13 +8,6 @@
     </div>
     <div class="flex">
       <button
-        aria-label="Edit user"
-        class="action-button p-1 focus:outline-none focus:shadow-outline text-teal-500 hover:text-teal-600"
-        @click="$emit('on-edit', user)"
-      >
-        <EditIcon/>
-      </button>
-      <button
         aria-label="Delete user"
         class="action-button p-1 focus:outline-none focus:shadow-outline text-red-500 hover:text-red-600"
         @click="$emit('on-delete', user)"
@@ -25,10 +18,9 @@
   </li>
 </template>
 <script>
-import { EditIcon, Trash2Icon } from "vue-feather-icons";
+import { Trash2Icon } from "vue-feather-icons";
 export default {
   components: {
-    EditIcon,
     Trash2Icon
   },
   props: {
