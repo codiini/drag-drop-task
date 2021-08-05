@@ -5,8 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    cardList: [
-    ],
+    cardList: [],
   },
   mutations: {
     updateList: (state, payload) => {
