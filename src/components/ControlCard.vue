@@ -1,7 +1,7 @@
 <template>
-  <li class="p-4 mb-3 flex justify-between items-center bg-white shadow-md rounded-lg cursor-move border border-white">
+  <li class="control-card p-4 mb-3 flex justify-between items-center bg-white rounded-md shadow-md cursor-move border border-white">
     <div class="w-30 flex items-center justify-between">
-      <div :style="{'background-color': user.color}" class=" h-12 w-12"></div>
+      <div :style="{'background-color': user.color}" class="rounded-md h-14 w-14"></div>
       <div class="flex items-center">
         <p class="ml-2 text-gray-700 font-semibold capitalize">
           {{ user.name }}
@@ -38,3 +38,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.control-card.moving-card{
+  background: #f7fafc;
+  border-bottom: 4px solid #000;
+  border-radius: 0;
+}
+</style>

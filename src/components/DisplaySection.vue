@@ -6,7 +6,7 @@
     >
       <img src="../assets/empty-state.svg" alt="" class="w-56" />
       <p class="font-bold text-2xl text-white mt-4">
-        Go on, add a new Browser Application &#128579;
+        Go on and add a new Application &#128579;
       </p>
     </div>
     <display-card

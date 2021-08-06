@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="flex justify-center h-screen">
+  <div id="app" class="flex justify-center min-h-screen">
     <ControlSection />
     <DisplaySection />
   </div>
@@ -18,10 +18,6 @@ export default {
 </script>
 
 <style>
-.moving-card {
-  opacity: 0.5;
-  background: #f7fafc;
-  border-bottom: 8px solid #000;
-}
+
 </style>
 
