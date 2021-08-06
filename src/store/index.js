@@ -23,13 +23,19 @@ export default new Vuex.Store({
     },
     getRandomColor({commit}){
       const colors = [
-        "F088D6",
         "49B6FF",
         "A480CF",
         "00497A",
         "80498C",
-        "80498C",
-        "C04995",
+        "BA2D0B",
+        "003E1F",
+        "A1E8AF",
+        "104547",
+        "931621",
+        "F2542D",
+        "0E9594",
+        "494850",
+        "F05365"
       ];
       let randomColor;
       randomColor = "#" + colors[Math.floor(Math.random() * colors.length)];
