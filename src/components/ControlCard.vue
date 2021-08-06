@@ -1,34 +1,17 @@
 <template>
-  <li
-    class="
-      p-4
-      mb-3
-      flex
-      justify-between
-      items-center
-      bg-white
-      shadow
-      rounded-lg
-      cursor-move
-      border border-white
-    "
-  >
-    <div class="flex items-center">
-      <p class="ml-2 text-gray-700 font-semibold font-sans tracking-wide">
-        {{ user.name }}
-      </p>
+  <li class="p-4 mb-3 flex justify-between items-center bg-white shadow-md rounded-lg cursor-move border border-white">
+    <div class="w-30 flex items-center justify-between">
+      <div :style="{'background-color': user.color}" class=" h-12 w-12"></div>
+      <div class="flex items-center">
+        <p class="ml-2 text-gray-700 font-semibold capitalize">
+          {{ user.name }}
+        </p>
+      </div>
     </div>
     <div class="flex">
       <button
         aria-label="Delete user"
-        class="
-          action-button
-          p-1
-          focus:outline-none
-          focus:shadow-outline
-          text-red-500
-          hover:text-red-600
-        "
+        class="p-1 text-red-500"
         @click="deleteCard(user)"
       >
         <Trash2Icon/>
@@ -51,11 +34,6 @@ export default {
   methods: {
    deleteCard(card) {
       this.$emit('deleteCard', card);
-    },
-  },
-  computed: {
-    getList() {
-      return this.$store.state.cardList;
     },
   },
 };

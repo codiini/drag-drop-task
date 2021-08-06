@@ -62,8 +62,10 @@ export default {
     },
     addCard() {
       if (this.newCard) {
+        this.$store.dispatch("getRandomColor");
         this.$store.state.cardList.push({
           name: this.newCard,
+          color: this.$store.state.currentColor
         });
         this.$store.state.cardList.forEach((item, i) => {
           item.id = i + 1;
