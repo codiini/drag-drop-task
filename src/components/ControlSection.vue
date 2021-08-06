@@ -72,6 +72,9 @@ export default {
         this.$store.state.cardList.push({
           name: this.newCard,
         });
+        this.$store.state.cardList.forEach((item, i) => {
+          item.id = i + 1;
+        });
         this.newCard = "";
       }
     },
