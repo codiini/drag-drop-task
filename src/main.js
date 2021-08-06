@@ -6,7 +6,8 @@ Vue.config.productionTip = false
 
 Vue.directive("color", {
   bind(el) {
-    el.style.background = "#" + (Math.random() * 0xFFFFFF << 0).toString(16);
+    var colors = ["F088D6", "49B6FF", "A480CF", "00497A", "80498C", "80498C", "C04995" ]
+    el.style.background = "#" + colors[Math.floor(Math.random() * colors.length)];
   }
 })
 
