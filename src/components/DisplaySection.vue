@@ -9,21 +9,26 @@
         Go on and add a new Application &#128579;
       </p>
     </div>
-    <display-card
-      v-for="user in this.$store.state.cardList"
-      :key="user.id"
-      :user="user"
-      >
-    </display-card>
+    <draggable
+      :animation="200" ghost-class="moving-card" group="users" 
+      tag="ul" class="w-full" v-model="myList">
+      <display-card
+        v-for="user in this.$store.state.cardList"
+        :key="user.id"
+        :user="user"
+        >
+      </display-card>
+    </draggable>
   </ul>
 </template>
 
 <script>
 import DisplayCard from "./DisplayCard";
-
+import draggable from "vuedraggable";
 export default {
   components: {
     DisplayCard,
+    draggable
   },
   data() {
     return {
@@ -31,6 +36,14 @@ export default {
     };
   },
   computed: {
+    myList: {
+      get() {
+        return this.$store.state.cardList;
+      },
+      set(value) {
+        this.$store.commit("updateList", value);
+      },
+    },
     getState() {
       if (this.$store.state.cardList.length) {
         return true;

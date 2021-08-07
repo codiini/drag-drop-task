@@ -1,5 +1,5 @@
 <template>
-  <li class="display-card mb-3 shadow-md border w-full h-10 h-44 bg-white">
+  <li class="display-card mb-3 shadow-md border w-full h-10 h-44 bg-white cursor-move">
       <div :style="{ 'background-color': user.color }" class="top-color h-20 w-full text-center">
         <p
           class="text-center font-semibold capitalize text-white text-2xl pt-3">
