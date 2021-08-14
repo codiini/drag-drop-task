@@ -1,59 +1,81 @@
 <template>
-  <ul class="right-side flex flex-col items-center w-3/4 bg-blue-200 px-20 pt-10">
-    <div
-      v-if="!getState"
-      class="flex items-center justify-center flex-col pt-10"
-    >
-      <img src="../assets/empty-state.svg" alt="" class="w-56" />
-      <p class="font-bold text-2xl text-white mt-4">
-        Go on and add a new Application &#128579;
-      </p>
-    </div>
-    <draggable
-      :animation="200" ghost-class="moving-card" group="users" 
-      tag="ul" class="w-full" v-model="myList">
-      <display-card
-        v-for="user in this.$store.state.cardList"
-        :key="user.id"
-        :user="user"
+  <div
+    class="right-side flex flex-col w-screen bg-blue-200 px-20 mx-auto pt-10"
+    :class="{'margin-add': controls}"
+  >
+  <slot></slot>
+    <ul class="w-full">
+      <div
+        v-if="!getState"
+        class="flex items-center justify-center flex-col pt-10"
+      >
+        <img src="../assets/empty-state.svg" alt="" class="w-56" />
+        <p class="font-bold text-2xl text-white mt-4">
+          Go on and add a new Application &#128579;
+        </p>
+      </div>
+      <draggable
+        :animation="200"
+        ghost-class="moving-card"
+        tag="ul"
+        class="w-full drop-zone"
+        v-model="newList"
+        :group="{ name: 'users' }"
+      >
+        <display-card
+          v-for="(user, index) in newList"
+          :key="index"
+          :user="user"
         >
-      </display-card>
-    </draggable>
-  </ul>
+        </display-card>
+      </draggable>
+    </ul>
+  </div>
 </template>
 
 <script>
 import DisplayCard from "./DisplayCard";
 import draggable from "vuedraggable";
+
 export default {
   components: {
     DisplayCard,
-    draggable
+    draggable,
   },
   data() {
     return {
       emptyState: "",
     };
   },
+  props:[
+    "controls",
+  ],
   computed: {
-    myList: {
-      get() {
-        return this.$store.state.cardList;
-      },
-      set(value) {
-        this.$store.commit("updateList", value);
-      },
-    },
     getState() {
-      if (this.$store.state.cardList.length) {
+      if (this.$store.state.controlCardList.length) {
         return true;
       } else {
         return false;
       }
+    },
+    newList: {
+      get() {
+        const payload = this.$store.state.controlCardList.map((b) =>
+          Object.assign(b)
+        );
+        return payload;
+      },
+      set(value) {
+        this.$store.commit("updateControlList", value);
+      },
     },
   },
 };
 </script>
 
 <style>
+.margin-add{
+  margin-left:18rem;
+  transition: 0.5s;
+}
 </style>
