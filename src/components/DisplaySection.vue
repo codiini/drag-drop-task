@@ -1,6 +1,6 @@
 <template>
   <div
-    class="right-side flex flex-col w-screen bg-blue-200 px-20 mx-auto pt-10"
+    class="right-side flex flex-col w-screen bg-blue-200 px-4 md:px-20 mx-auto pt-10"
     :class="{ 'margin-add': controls }"
   >
     <slot></slot>
@@ -83,5 +83,10 @@ export default {
 .margin-add {
   margin-left: 18rem;
   transition: 0.5s;
+}
+@media screen and (max-width:760px) {
+ .margin-add{
+   margin-left:2rem;
+ }
 }
 </style>

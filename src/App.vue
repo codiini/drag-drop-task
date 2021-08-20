@@ -2,7 +2,7 @@
   <div id="app" class="flex justify-center min-h-screen">
     <ControlSection :controls="control"/>
     <DisplaySection :controls="control">
-      <div class="cursor-pointer flex items-start" @click="navMenu">
+      <div :class="{'ml-64':control}" class="cursor-pointer flex items-start md:ml-0" @click="navMenu">
         <MenuIcon />
       </div>
     </DisplaySection>

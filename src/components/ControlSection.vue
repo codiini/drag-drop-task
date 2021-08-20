@@ -134,6 +134,7 @@ export default {
   background: #fff;
   height: 100%;
   transition: 0.5s;
+  overflow-y:scroll;
 }
 .addWidth {
   width: 300px;
