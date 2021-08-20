@@ -1,6 +1,7 @@
 <template>
-  <div class="controls-container flex items-start justify-center"
-  :class="{addWidth: controls}"
+  <div
+    class="controls-container flex items-start justify-center"
+    :class="{ addWidth: controls }"
   >
     <div class="flex flex-col pt-20" v-if="controls">
       <draggable
@@ -11,6 +12,7 @@
         class="w-full max-w-md card-container"
         tag="ul"
         :list="myList"
+        :move="move"
       >
         <control-card
           @deleteCard="deleteCard"
@@ -62,19 +64,17 @@
 <script>
 import draggable from "vuedraggable";
 import ControlCard from "./ControlCard";
-import { PlusCircleIcon} from "vue-feather-icons";
-
+import { PlusCircleIcon } from "vue-feather-icons";
 export default {
   components: {
     draggable,
     ControlCard,
     PlusCircleIcon,
   },
-  props:["controls"],
+  props: ["controls"],
   data() {
     return {
       newCard: "",
-      hello:false,
     };
   },
   computed: {
@@ -90,59 +90,52 @@ export default {
   methods: {
     deleteCard(card) {
       const cardIndex = this.$store.state.controlCardList.indexOf(card);
-      this.$store.state.controlCardList.splice(cardIndex, 1);
+      this.$store.dispatch("deleteCard", cardIndex);
+    },
+    makeid(length) {
+      var result = "";
+      var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#@$%*&";
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
     },
     addCard() {
       if (this.newCard) {
         this.$store.dispatch("getRandomColor");
-        // const randomChars = ["#", "@", "&", "*"];
-        // const generatedRandomChars = Math.floor(
-        //   Math.random() * randomChars.length
-        // );
-        this.$store.state.controlCardList.push({
+        this.$store.dispatch("addCard", {
           name: this.newCard,
           color: this.$store.state.currentColor,
-        });
-        this.$store.state.cardList.forEach((item, i) => {
-          item.id = i + 1;
+          id: this.makeid(3),
         });
         this.newCard = "";
       }
     },
-
-    // checkCardClass(card) {
-    //   if (card.to.classList.contains("drop-zone")) {
-    //     const draggedElementID = card.dragged.id;
-    //     this.moveCard(draggedElementID);
-    //   }
-    // },
-    // moveCard(id) {
-    //   const storeList = this.$store.state.controlCardList;
-    //   storeList.map((item) => {
-    //     console.log(item.id)
-    //     console.log(id)
-    //     if (item.id === id) {
-    //       const itemIndex = storeList.indexOf(item)
-    //       storeList.splice(itemIndex, 1);
-    //     }
-    //   });
-    // },
+    move(id) {
+      if (id.to.classList.contains("drop-zone")) {
+        this.$store.state.presentIndex = id.draggedContext.index + 1;
+      }
+    },
   },
 };
 </script>
 
 <style>
-.controls-container{
-  position:fixed;
+.controls-container {
+  position: fixed;
   z-index: 5;
-  width:0;
-  top:0;
-  left:0;
-  background:#fff;
-  height:100%;
+  width: 0;
+  top: 0;
+  left: 0;
+  background: #fff;
+  height: 100%;
   transition: 0.5s;
 }
-.addWidth{
-  width:300px;
+.addWidth {
+  width: 300px;
 }
 </style>

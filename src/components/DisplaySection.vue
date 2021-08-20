@@ -1,9 +1,9 @@
 <template>
   <div
     class="right-side flex flex-col w-screen bg-blue-200 px-20 mx-auto pt-10"
-    :class="{'margin-add': controls}"
+    :class="{ 'margin-add': controls }"
   >
-  <slot></slot>
+    <slot></slot>
     <ul class="w-full">
       <div
         v-if="!getState"
@@ -21,6 +21,7 @@
         class="w-full drop-zone"
         v-model="newList"
         :group="{ name: 'users' }"
+        @change="change"
       >
         <display-card
           v-for="(user, index) in newList"
@@ -47,9 +48,7 @@ export default {
       emptyState: "",
     };
   },
-  props:[
-    "controls",
-  ],
+  props: ["controls"],
   computed: {
     getState() {
       if (this.$store.state.controlCardList.length) {
@@ -57,7 +56,7 @@ export default {
       } else {
         return false;
       }
-    },
+    }, 
     newList: {
       get() {
         const payload = this.$store.state.controlCardList.map((b) =>
@@ -70,12 +69,19 @@ export default {
       },
     },
   },
+  methods: {
+    change(id) {
+      if (id.added) {
+        this.$store.dispatch("deleteCard", this.$store.state.presentIndex);
+      }
+    },
+  },
 };
 </script>
 
 <style>
-.margin-add{
-  margin-left:18rem;
+.margin-add {
+  margin-left: 18rem;
   transition: 0.5s;
 }
 </style>

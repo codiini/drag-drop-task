@@ -4,12 +4,7 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-Vue.directive("color", {
-  bind(el) {
-    var colors = ["F088D6", "49B6FF", "A480CF", "00497A", "80498C", "80498C", "C04995" ]
-    el.style.background = "#" + colors[Math.floor(Math.random() * colors.length)];
-  }
-})
+export const bus = new Vue();
 
 new Vue({
   store,

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
 
@@ -8,27 +7,38 @@ export default new Vuex.Store({
   state: {
     cardList: [],
     controlCardList: [],
-    sortedList : [],
-    currentColor:null
+    currentColor: null,
+    addedState: {},
+    presentIndex: null,
   },
   mutations: {
     updateControlList: (state, payload) => {
-      if(state.controlCardList.includes(payload)){
-        return
-      }
-      else{
-        state.controlCardList = payload;
-      }
+      state.controlCardList = payload;
     },
-    updateCurrentColor: (state, payload) =>{
+    updateCurrentColor: (state, payload) => {
       state.currentColor = payload
+    },
+    updateAddState: (state, payload) => {
+      state.addedState = payload
+    },
+    deleteCard: (state, payload) => {
+      state.controlCardList.splice(payload, 1)
+    },
+    addCard: (state, payload) => {
+      state.controlCardList.push(payload);
     },
   },
   actions: {
     updateControlList: ({ commit }, payload) => {
       commit("updateControlList", payload);
     },
-    getRandomColor({commit}){
+    deleteCard: ({ commit }, payload) => {
+      commit("deleteCard", payload);
+    },
+    addCard: ({ commit }, payload) => {
+      commit("addCard", payload);
+    },
+    getRandomColor({ commit }) {
       const colors = [
         "49B6FF",
         "A480CF",
@@ -46,10 +56,9 @@ export default new Vuex.Store({
       ];
       let randomColor;
       randomColor = "#" + colors[Math.floor(Math.random() * colors.length)];
-      commit("updateCurrentColor", randomColor )
+      commit("updateCurrentColor", randomColor)
     }
   },
   modules: {
   },
-  // plugins: [createPersistedState()],
 })
