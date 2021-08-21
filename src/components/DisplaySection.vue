@@ -1,6 +1,6 @@
 <template>
   <div
-    class="right-side flex flex-col w-screen bg-blue-200 px-4 md:px-20 mx-auto pt-10"
+    class="right-side flex flex-col w-screen bg-blue-200 px-4 md:px-20 mx-auto pt-10 pb-20"
     :class="{ 'margin-add': controls }"
   >
     <slot></slot>
@@ -72,7 +72,12 @@ export default {
   methods: {
     change(id) {
       if (id.added) {
-        this.$store.dispatch("deleteCard", this.$store.state.presentIndex);
+        if(id.added.newIndex > this.$store.state.presentIndex){
+          this.$store.dispatch("deleteCard", this.$store.state.presentIndex);
+        }
+        else if(id.added.newIndex < this.$store.state.presentIndex){
+          this.$store.dispatch("deleteCard", this.$store.state.presentIndex + 1);
+        }
       }
     },
   },

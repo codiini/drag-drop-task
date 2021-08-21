@@ -117,7 +117,7 @@ export default {
     },
     move(id) {
       if (id.to.classList.contains("drop-zone")) {
-        this.$store.state.presentIndex = id.draggedContext.index + 1;
+        this.$store.state.presentIndex = id.draggedContext.index;
       }
     },
   },
