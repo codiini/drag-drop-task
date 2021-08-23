@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="flex justify-center min-h-screen">
-    <ControlSection :controls="control"/>
-    <DisplaySection :controls="control">
-      <div :class="{'ml-64':control}" class="cursor-pointer flex items-start md:ml-0" @click="navMenu">
+    <ControlSection/>
+    <DisplaySection>
+      <div class="cursor-pointer flex items-start md:ml-0 inline-block" @click="navMenu">
         <MenuIcon />
       </div>
     </DisplaySection>
@@ -23,12 +23,11 @@ export default {
   },
   data(){
     return{
-      control: false,
     }
   },
   methods: {
     navMenu() {
-      this.control = !this.control
+      this.$store.state.navState = !this.$store.state.navState
     },
   },
 };

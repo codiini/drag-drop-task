@@ -1,7 +1,7 @@
 <template>
   <div
     class="right-side flex flex-col w-screen bg-blue-200 px-4 md:px-20 mx-auto pt-10 pb-20"
-    :class="{ 'margin-add': controls }"
+    :class="{ 'margin-add': this.$store.state.navState }"
   >
     <slot></slot>
     <ul class="w-full">
@@ -48,7 +48,7 @@ export default {
       emptyState: "",
     };
   },
-  props: ["controls"],
+  props: ["this.$store.state.navState"],
   computed: {
     getState() {
       if (this.$store.state.controlCardList.length) {

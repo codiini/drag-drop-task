@@ -1,9 +1,10 @@
 <template>
   <div
     class="controls-container flex items-start justify-center"
-    :class="{ addWidth: controls }"
+    :class="{ addWidth: this.$store.state.navState }"
   >
-    <div class="flex flex-col pt-20" v-if="controls">
+  <XIcon class="relative top-8 left-48 md:hidden cursor-pointer"  @click="navMenu"/>
+    <div class="flex flex-col pt-20" v-if="this.$store.state.navState">
       <draggable
         :animation="200"
         ghost-class="moving-card"
@@ -64,14 +65,14 @@
 <script>
 import draggable from "vuedraggable";
 import ControlCard from "./ControlCard";
-import { PlusCircleIcon } from "vue-feather-icons";
+import { PlusCircleIcon, XIcon } from "vue-feather-icons";
 export default {
   components: {
     draggable,
     ControlCard,
     PlusCircleIcon,
+    XIcon,
   },
-  props: ["controls"],
   data() {
     return {
       newCard: "",
@@ -120,6 +121,9 @@ export default {
         this.$store.state.presentIndex = id.draggedContext.index;
       }
     },
+    navMenu(){
+      this.$store.state.navState = !this.$store.state.navState
+    }
   },
 };
 </script>

@@ -10,6 +10,7 @@ export default new Vuex.Store({
     currentColor: null,
     addedState: {},
     presentIndex: null,
+    navState:true,
   },
   mutations: {
     updateControlList: (state, payload) => {
