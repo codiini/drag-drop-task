@@ -48,7 +48,6 @@ export default {
       emptyState: "",
     };
   },
-  props: ["this.$store.state.navState"],
   computed: {
     getState() {
       if (this.$store.state.controlCardList.length) {
@@ -72,7 +71,7 @@ export default {
   methods: {
     change(id) {
       if (id.added) {
-        if(id.added.newIndex > this.$store.state.presentIndex){
+        if(id.added.newIndex > this.$store.state.presentIndex || id.added.newIndex == this.$store.state.presentIndex){
           this.$store.dispatch("deleteCard", this.$store.state.presentIndex);
         }
         else if(id.added.newIndex < this.$store.state.presentIndex){
