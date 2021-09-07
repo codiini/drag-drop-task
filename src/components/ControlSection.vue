@@ -3,7 +3,10 @@
     class="controls-container flex items-start justify-center"
     :class="{ addWidth: this.$store.state.navState }"
   >
-  <XIcon class="relative top-8 left-48 md:hidden cursor-pointer"  @click="navMenu"/>
+    <XIcon
+      class="relative top-8 left-48 md:hidden cursor-pointer"
+      @click="navMenu"
+    />
     <div class="flex flex-col pt-20" v-if="this.$store.state.navState">
       <draggable
         :animation="200"
@@ -119,11 +122,13 @@ export default {
     move(id) {
       if (id.to.classList.contains("drop-zone")) {
         this.$store.state.presentIndex = id.draggedContext.index;
+        this.$store.dispatch("cardHover", true)
       }
+      console.log(id);
     },
-    navMenu(){
-      this.$store.state.navState = !this.$store.state.navState
-    }
+    navMenu() {
+      this.$store.state.navState = !this.$store.state.navState;
+    },
   },
 };
 </script>
@@ -138,7 +143,7 @@ export default {
   background: #fff;
   height: 100%;
   transition: 0.5s;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
 .addWidth {
   width: 300px;

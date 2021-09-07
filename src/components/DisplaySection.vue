@@ -71,6 +71,7 @@ export default {
   methods: {
     change(id) {
       if (id.added) {
+        this.$store.dispatch("cardMove", true)
         if(id.added.newIndex > this.$store.state.presentIndex || id.added.newIndex == this.$store.state.presentIndex){
           this.$store.dispatch("deleteCard", this.$store.state.presentIndex);
         }

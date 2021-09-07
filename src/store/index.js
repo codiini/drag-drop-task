@@ -11,6 +11,8 @@ export default new Vuex.Store({
     addedState: {},
     presentIndex: null,
     navState:true,
+    cardHoverState: false,
+    cardMoveState:false,
   },
   mutations: {
     updateControlList: (state, payload) => {
@@ -28,6 +30,14 @@ export default new Vuex.Store({
     addCard: (state, payload) => {
       state.controlCardList.push(payload);
     },
+    cardHover: (state, payload) =>{
+      state.cardHoverState = payload
+      state.cardMoveState = !payload;
+    },
+    cardMove: (state, payload) =>{
+      state.cardMoveState = payload;
+      state.cardHoverState = !payload
+    }
   },
   actions: {
     updateControlList: ({ commit }, payload) => {
@@ -38,6 +48,12 @@ export default new Vuex.Store({
     },
     addCard: ({ commit }, payload) => {
       commit("addCard", payload);
+    },
+    cardHover: ({commit}, payload) =>{
+      commit("cardHover", payload)
+    },
+    cardMove: ({commit}, payload) =>{
+      commit("cardMove", payload)
     },
     getRandomColor({ commit }) {
       const colors = [
