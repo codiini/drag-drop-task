@@ -7,7 +7,7 @@
       class="relative top-8 left-48 md:hidden cursor-pointer"
       @click="navMenu"
     />
-    <div class="flex flex-col pt-20" v-if="this.$store.state.navState">
+    <div class="flex flex-col pt-20">
       <draggable
         :animation="200"
         ghost-class="moving-card"
@@ -122,9 +122,10 @@ export default {
     move(id) {
       if (id.to.classList.contains("drop-zone")) {
         this.$store.state.presentIndex = id.draggedContext.index;
+        this.$store.state.navState = false
         this.$store.dispatch("cardHover", true)
+        // this.$store.state.navState = true
       }
-      console.log(id);
     },
     navMenu() {
       this.$store.state.navState = !this.$store.state.navState;
